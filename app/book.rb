@@ -1,6 +1,8 @@
-# A book.
-class Book
-  def self.all
-    'title'
+require 'webmachine'
+
+# A webmachine resource representing a book.
+class Book < Webmachine::Resource
+  def to_html
+    '<html><body>title</html></body>'
   end
 end

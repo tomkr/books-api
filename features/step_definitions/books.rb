@@ -2,9 +2,9 @@ Given(/^a couple of books$/) do
 end
 
 Given(/^a user requests a list of books$/) do
-  @result = Book.all
+  get '/'
 end
 
 Then(/^the response should contain "([^"]*)"$/) do |contents|
-  @result.include?(contents)
+  last_response.include?(contents)
 end
