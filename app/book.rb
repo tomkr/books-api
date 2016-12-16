@@ -1,5 +1,6 @@
+# A book.
 class Book
   def self.all
-    "title"
+    'title'
   end
 end
