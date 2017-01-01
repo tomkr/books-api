@@ -6,6 +6,7 @@ gem 'webmachine'
 group :test do
   gem 'cucumber'
   gem 'rack-test'
+  gem 'rspec-expectations'
 end
 
 group :test, :development do

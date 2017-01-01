@@ -1,10 +1,18 @@
-Given(/^a couple of books$/) do
+Given(/^a book with title "([^"]*)"$/) do |_arg1|
 end
 
-Given(/^a user requests a list of books$/) do
-  get '/'
+Given(/^a user requests "([^"]*)"$/) do |path|
+  get path
 end
 
-Then(/^the response should contain "([^"]*)"$/) do |contents|
-  last_response.include?(contents)
+Then(/^the response should have "([^"]*)" "([^"]*)"$/) do |key, value|
+  expect(parsed_response[key]).to eq(value)
+end
+
+Then(/^the response should have a link to self$/) do
+  expect(parsed_response['_links']['self']['href']).to eq(last_request.path)
+end
+
+def parsed_response
+  JSON.parse(last_response.body)
 end
