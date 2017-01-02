@@ -5,11 +5,15 @@ require './app/models/book'
 # A webmachine resource representing a book.
 class BooksResource < Webmachine::Resource
   def allowed_methods
-    ['POST']
+    %w(GET POST)
   end
 
   def content_types_accepted
     [['application/json', :from_json]]
+  end
+
+  def content_types_provided
+    [['application/hal+json', :to_json]]
   end
 
   def post_is_create?
@@ -25,6 +29,19 @@ class BooksResource < Webmachine::Resource
   def from_json
     return invalid unless book.valid?
     response.body = book.attributes.merge(_links: links).to_json
+  end
+
+  def to_json
+    {
+      _links: {
+        self: {
+          href: '/books'
+        }
+      },
+      _embedded: {
+        books: Book.all
+      }
+    }.to_json
   end
 
   def book

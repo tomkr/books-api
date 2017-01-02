@@ -3,6 +3,15 @@ Feature: Books
   I want to browse the books database
   So I can update my collection
 
+  Scenario: List books
+    Given a book with title "The Final Empire"
+    And a user requests "/books"
+    Then the status should be 200
+    And the response should have a "self" link to "/books"
+    And the response has embedded "books" with
+      | title            |
+      | The Final Empire |
+
   Scenario: View a book
     Given a book with title "Title"
     And a user requests "/books/1"
