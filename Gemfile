@@ -7,6 +7,7 @@ gem 'webmachine'
 
 group :test do
   gem 'cucumber'
+  gem 'database_cleaner'
   gem 'rack-test'
   gem 'rspec-expectations'
 end
