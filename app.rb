@@ -1,8 +1,8 @@
 require 'webmachine'
-require './app/book'
+require './app/resources'
 
 App = Webmachine::Application.new do |app|
   app.routes do
-    add ['books', :id], Book
+    add ['books', :id], BookResource
   end
 end

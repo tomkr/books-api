@@ -1,4 +1,7 @@
-Given(/^a book with title "([^"]*)"$/) do |_arg1|
+require './app/models/book'
+
+Given(/^a book with title "([^"]*)"$/) do |title|
+  Book.create(title: title)
 end
 
 Given(/^a user requests "([^"]*)"$/) do |path|

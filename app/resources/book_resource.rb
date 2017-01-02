@@ -2,7 +2,7 @@ require 'json'
 require 'webmachine'
 
 # A webmachine resource representing a book.
-class Book < Webmachine::Resource
+class BookResource < Webmachine::Resource
   def content_types_provided
     [['application/hal+json', :to_json]]
   end
