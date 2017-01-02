@@ -16,6 +16,10 @@ Then(/^the response should have a link to self$/) do
   expect(parsed_response['_links']['self']['href']).to eq(last_request.path)
 end
 
+Then(/^the status should be (\d+)$/) do |code|
+  expect(last_response.status).to eq(code.to_i)
+end
+
 def parsed_response
   JSON.parse(last_response.body)
 end

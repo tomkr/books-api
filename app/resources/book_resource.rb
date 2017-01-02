@@ -19,7 +19,7 @@ class BookResource < Webmachine::Resource
   private
 
   def book
-    @book ||= Book.find(id)
+    @book ||= Book.find_by(id: id)
   end
 
   def links

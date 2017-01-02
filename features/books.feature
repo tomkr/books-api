@@ -8,3 +8,7 @@ Feature: Books
     And a user requests "/books/1"
     Then the response should have "title" "Title"
     And the response should have a link to self
+
+  Scenario: Book does not exist
+    Given a user requests "/books/1"
+    Then the status should be 404
