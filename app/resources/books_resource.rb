@@ -23,6 +23,7 @@ class BooksResource < Webmachine::Resource
   private
 
   def from_json
+    return invalid unless book.valid?
     response.body = book.attributes.merge(_links: links).to_json
   end
 
@@ -40,5 +41,10 @@ class BooksResource < Webmachine::Resource
 
   def next_id
     @id ||= Book.maximum(:id) ? Book.maximum(:id).next : 1
+  end
+
+  def invalid
+    response.body = book.errors.to_json
+    400
   end
 end

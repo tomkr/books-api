@@ -19,3 +19,7 @@ Feature: Books
     Then the status should be 201
     And the response should have "title" "Title"
     And the response should have a "self" link to "/books/1"
+
+  Scenario: Add a malformed book
+    Given a user posts '{}' to "/books"
+    Then the status should be 400
