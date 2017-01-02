@@ -8,12 +8,16 @@ Given(/^a user requests "([^"]*)"$/) do |path|
   get path
 end
 
+Given(/^a user posts '([^']*)' to "([^"]*)"$/) do |body, path|
+  post path, body, 'CONTENT_TYPE' => 'application/json'
+end
+
 Then(/^the response should have "([^"]*)" "([^"]*)"$/) do |key, value|
   expect(parsed_response[key]).to eq(value)
 end
 
-Then(/^the response should have a link to self$/) do
-  expect(parsed_response['_links']['self']['href']).to eq(last_request.path)
+Then(/^the response should have a "([^"]*)" link to "([^"]*)"$/) do |key, path|
+  expect(parsed_response['_links'][key]['href']).to eq(path)
 end
 
 Then(/^the status should be (\d+)$/) do |code|
