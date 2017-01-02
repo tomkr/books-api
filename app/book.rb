@@ -1,3 +1,4 @@
+require 'json'
 require 'webmachine'
 
 # A webmachine resource representing a book.
