@@ -5,5 +5,12 @@ json._links do
 end
 
 json._embedded do
-  json.authors authors, :name
+  json.authors authors do |author|
+    json.name author.name
+    json._links do
+      json.self do
+        json.href "/authors/#{author.id}"
+      end
+    end
+  end
 end
