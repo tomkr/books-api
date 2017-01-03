@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 gem 'activerecord'
 gem 'pg'
+gem 'tilt-jbuilder'
 gem 'webmachine'
 
 group :test do

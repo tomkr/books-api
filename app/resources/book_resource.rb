@@ -1,4 +1,5 @@
 require 'json'
+require 'tilt/jbuilder'
 require 'webmachine'
 require './app/models/book'
 
@@ -8,26 +9,19 @@ class BookResource < Webmachine::Resource
     [['application/hal+json', :to_json]]
   end
 
-  def to_json
-    book.attributes.merge(_links: links).to_json
-  end
-
   def resource_exists?
     book
   end
 
   private
 
-  def book
-    @book ||= Book.find_by(id: id)
+  def to_json
+    template = Tilt::JbuilderTemplate.new('app/templates/book.json.jbuilder')
+    template.render nil, book: book
   end
 
-  def links
-    {
-      self: {
-        href: "/books/#{id}"
-      }
-    }
+  def book
+    @book ||= Book.find_by(id: id)
   end
 
   def id
