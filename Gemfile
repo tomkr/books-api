@@ -2,6 +2,7 @@
 source 'https://rubygems.org'
 
 gem 'activerecord'
+gem 'hyperresource'
 gem 'pg'
 gem 'tilt-jbuilder'
 gem 'webmachine'
