@@ -29,8 +29,8 @@ Then(/^the response has embedded "([^"]*)" with$/) do |list, table|
   hashes = table.hashes
   keys = hashes.first.keys
   keys.each do |k|
-    expect(hashes.map {|v| v.fetch(k) })
-      .to match_array(list.map { |v| v.fetch(k) } )
+    expect(hashes.map { |v| v.fetch(k) })
+      .to match_array(list.map { |v| v.fetch(k) })
   end
 end
 

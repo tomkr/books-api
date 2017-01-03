@@ -1,0 +1,9 @@
+# Exclude automatically generated files.
+AllCops:
+  Exclude:
+    - db/schema.rb
+
+# Exclude migrations.
+Style/Documentation:
+  Exclude:
+    - db/**/*
