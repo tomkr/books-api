@@ -1,7 +1,7 @@
 require './app/models/book'
 
 Given(/^a book with title "([^"]*)"$/) do |title|
-  Book.create(title: title)
+  create(:book, title: title)
 end
 
 Given(/^a user requests "([^"]*)"$/) do |path|

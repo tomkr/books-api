@@ -1,5 +1,6 @@
 require 'rack/test'
 require 'webmachine/adapters/rack'
+require 'factory_girl'
 ENV['ENV'] = 'test'
 require './app'
 
@@ -14,6 +15,8 @@ module AppHelpers
   def app
     App.adapter
   end
+
+  FactoryGirl.find_definitions
 end
 
-World(AppHelpers)
+World(AppHelpers, FactoryGirl::Syntax::Methods)
