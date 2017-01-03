@@ -1,10 +1,11 @@
-require 'json'
-require 'tilt/jbuilder'
 require 'webmachine'
 require './app/models/book'
+require './app/resources/render'
 
 # A webmachine resource for the collection of books.
 class BooksResource < Webmachine::Resource
+  include Render
+
   def allowed_methods
     %w(GET POST)
   end
@@ -29,13 +30,11 @@ class BooksResource < Webmachine::Resource
 
   def from_json
     return invalid unless book.valid?
-    template = Tilt::JbuilderTemplate.new('app/templates/book.json.jbuilder')
-    response.body = template.render(nil, book: book)
+    response.body = render(template: 'book', locals: { book: book })
   end
 
   def to_json
-    template = Tilt::JbuilderTemplate.new('app/templates/books.json.jbuilder')
-    template.render nil, books: Book.all
+    render(template: 'books', locals: { books: Book.all })
   end
 
   def book

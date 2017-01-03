@@ -1,10 +1,11 @@
-require 'json'
-require 'tilt/jbuilder'
 require 'webmachine'
 require './app/models/book'
+require './app/resources/render'
 
 # A webmachine resource representing a book.
 class BookResource < Webmachine::Resource
+  include Render
+
   def content_types_provided
     [['application/hal+json', :to_json]]
   end
@@ -16,8 +17,7 @@ class BookResource < Webmachine::Resource
   private
 
   def to_json
-    template = Tilt::JbuilderTemplate.new('app/templates/book.json.jbuilder')
-    template.render nil, book: book
+    render(template: 'book', locals: { book: book })
   end
 
   def book
