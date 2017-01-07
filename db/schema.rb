@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(version: 2) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "authors_id"
-    t.index ["authors_id"], name: "index_books_on_authors_id", using: :btree
+    t.integer  "author_id"
+    t.index ["author_id"], name: "index_books_on_author_id", using: :btree
   end
 
-  add_foreign_key "books", "authors", column: "authors_id"
+  add_foreign_key "books", "authors"
 end
