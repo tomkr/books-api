@@ -7,3 +7,7 @@ end
 Given(/^a book with author "([^"]*)"$/) do |author_name|
   create(:book, author: Author.find_by(name: author_name))
 end
+
+Given(/^a book with title "([^"]*)" by "([^"]*)"$/) do |title, author_name|
+  create(:book, title: title, author: Author.find_by(name: author_name))
+end

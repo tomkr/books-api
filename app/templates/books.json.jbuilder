@@ -1,6 +1,6 @@
 json._links do
   json.self do
-    json.href '/books'
+    json.href self_link
   end
 end
 

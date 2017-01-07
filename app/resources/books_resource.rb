@@ -34,7 +34,11 @@ class BooksResource < Webmachine::Resource
   end
 
   def to_json
-    render(template: 'books', locals: { books: Book.all })
+    render(template: 'books',
+           locals: {
+             books: Book.all,
+             self_link: '/books'
+           })
   end
 
   def book
