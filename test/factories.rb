@@ -5,5 +5,6 @@ FactoryGirl.define do
 
   factory :book do
     title 'Test title'
+    author
   end
 end

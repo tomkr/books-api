@@ -13,9 +13,9 @@ Feature: Books
       | The Final Empire |
 
   Scenario: List books for a specific author
-    Given a book with title "Game of Thrones"
-    And an author with name "Brandon Sanderson"
+    Given an author with name "Brandon Sanderson"
     And a book with title "The Final Empire" by "Brandon Sanderson"
+    And a book with title "Game of Thrones"
     And a user requests "authors/1/books"
     Then the status should be 200
     And the response should have a "self" link to "authors/1/books"
@@ -35,7 +35,8 @@ Feature: Books
     Then the status should be 404
 
   Scenario: Add a book
-    Given a user posts '{"title": "Title"}' to "/books"
+    Given an author with name "Brandon Sanderson"
+    And a user posts '{"title": "Title", "author_id": "1"}' to "/books"
     Then the status should be 201
     And the response should have "title" "Title"
     And the response should have a "self" link to "/books/1"
