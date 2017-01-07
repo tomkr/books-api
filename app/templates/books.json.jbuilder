@@ -5,5 +5,10 @@ json._links do
 end
 
 json._embedded do
-  json.books books, :title
+  json.books books.each do |book|
+    json.title book.title
+    json._links do
+      json.self { json.href "/books/#{book.id}" }
+    end
+  end
 end
