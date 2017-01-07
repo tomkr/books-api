@@ -9,6 +9,10 @@ Given(/^a user posts '([^']*)' to "([^"]*)"$/) do |body, path|
   post path, body, 'CONTENT_TYPE' => 'application/json'
 end
 
+Given(/^a user puts '([^']*)' to "([^"]*)"$/) do |body, path|
+  put path, body, 'CONTENT_TYPE' => 'application/json'
+end
+
 Then(/^the response should have "([^"]*)" "([^"]*)"$/) do |key, value|
   expect(parsed_response[key]).to eq(value)
 end

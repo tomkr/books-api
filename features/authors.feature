@@ -30,3 +30,10 @@ Feature: Authors
   Scenario: Author does not exist
     Given a user requests "/authors/1"
     Then the status should be 404
+
+  Scenario: Edit an author
+    Given an author with name "Brandon Sanderson"
+    And a user puts '{"name": "George R. R. Martin"}' to "/authors/1"
+    Then the status should be 200
+    And the response should have "name" "George R. R. Martin"
+    And the response should have a "self" link to "/authors/1"
