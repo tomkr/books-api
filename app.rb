@@ -11,6 +11,7 @@ App = Webmachine::Application.new do |app|
   )
 
   app.routes do
+    add [], ApiResource
     add ['authors'], AuthorsResource
     add ['authors', :id], AuthorResource
     add ['books'], BooksResource
