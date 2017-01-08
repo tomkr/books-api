@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3) do
+ActiveRecord::Schema.define(version: 4) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,21 @@ ActiveRecord::Schema.define(version: 3) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "author_id",      null: false
+    t.integer  "serie_id"
+    t.integer  "serie_position"
+    t.index ["author_id"], name: "index_books_on_author_id", using: :btree
+    t.index ["serie_id"], name: "index_books_on_serie_id", using: :btree
+  end
+
+  create_table "series", force: :cascade do |t|
+    t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "author_id",  null: false
-    t.index ["author_id"], name: "index_books_on_author_id", using: :btree
   end
 
   add_foreign_key "books", "authors"
+  add_foreign_key "books", "series", column: "serie_id"
 end

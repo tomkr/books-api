@@ -7,4 +7,8 @@ FactoryGirl.define do
     title 'Test title'
     author
   end
+
+  factory :serie do
+    title 'Test serie title'
+  end
 end
