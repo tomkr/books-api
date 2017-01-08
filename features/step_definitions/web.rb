@@ -13,6 +13,10 @@ Given(/^a user puts '([^']*)' to "([^"]*)"$/) do |body, path|
   put path, body, 'CONTENT_TYPE' => 'application/json'
 end
 
+Given(/^a user deletes "([^"]*)"$/) do |path|
+  delete path
+end
+
 Then(/^the response should have "([^"]*)" "([^"]*)"$/) do |key, value|
   expect(parsed_response[key]).to eq(value)
 end

@@ -37,3 +37,8 @@ Feature: Authors
     Then the status should be 200
     And the response should have "name" "George R. R. Martin"
     And the response should have a "self" link to "/authors/1"
+
+  Scenario: Delete an author
+    Given an author with name "Brandon Sanderson"
+    And a user deletes "/authors/1"
+    Then the status should be 204
