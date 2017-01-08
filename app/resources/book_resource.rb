@@ -7,7 +7,7 @@ class BookResource < Webmachine::Resource
   include Render
 
   def allowed_methods
-    %w(GET PUT)
+    %w(GET PUT DELETE)
   end
 
   def content_types_accepted
@@ -16,6 +16,10 @@ class BookResource < Webmachine::Resource
 
   def content_types_provided
     [['application/hal+json', :to_json]]
+  end
+
+  def delete_resource
+    book.destroy
   end
 
   def resource_exists?

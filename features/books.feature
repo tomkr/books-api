@@ -51,3 +51,8 @@ Feature: Books
     Then the status should be 200
     And the response should have "title" "The Winds of Winter"
     And the response should have a "self" link to "/books/1"
+
+  Scenario: Delete a book
+    Given a book with title "A Game of Thrones"
+    And a user deletes "/books/1"
+    Then the status should be 204
