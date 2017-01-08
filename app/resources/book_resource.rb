@@ -6,6 +6,14 @@ require './app/resources/render'
 class BookResource < Webmachine::Resource
   include Render
 
+  def allowed_methods
+    %w(GET PUT)
+  end
+
+  def content_types_accepted
+    [['application/json', :from_json]]
+  end
+
   def content_types_provided
     [['application/hal+json', :to_json]]
   end
@@ -15,6 +23,11 @@ class BookResource < Webmachine::Resource
   end
 
   private
+
+  def from_json
+    book.update(JSON.parse(request.body.to_s))
+    response.body = render(template: 'book', locals: { book: book })
+  end
 
   def to_json
     render(template: 'book', locals: { book: book })

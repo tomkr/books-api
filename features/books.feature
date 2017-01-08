@@ -44,3 +44,10 @@ Feature: Books
   Scenario: Add a malformed book
     Given a user posts '{}' to "/books"
     Then the status should be 400
+
+  Scenario: Edit a book
+    Given a book with title "A Game of Thrones"
+    And a user puts '{"title": "The Winds of Winter"}' to "/books/1"
+    Then the status should be 200
+    And the response should have "title" "The Winds of Winter"
+    And the response should have a "self" link to "/books/1"
