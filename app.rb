@@ -11,5 +11,6 @@ App = Webmachine::Application.new do |app|
     add ['books'], BooksResource
     add ['books', :id], BookResource
     add ['series'], SeriesResource
+    add ['series', :id], SerieResource
   end
 end
