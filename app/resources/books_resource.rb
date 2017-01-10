@@ -42,7 +42,8 @@ class BooksResource < Webmachine::Resource
   end
 
   def book
-    @book ||= Book.create(JSON.parse(request.body.to_s))
+    @book ||= Book.create(JSON.parse(request.body.to_s)
+      .merge(slug: 'test-slug'))
   end
 
   def next_id

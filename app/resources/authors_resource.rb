@@ -29,7 +29,8 @@ class AuthorsResource < Webmachine::Resource
   private
 
   def author
-    @author ||= Author.create(JSON.parse(request.body.to_s))
+    @author ||= Author.create(JSON.parse(request.body.to_s)
+      .merge(slug: 'test-slug'))
   end
 
   def from_json
