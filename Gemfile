@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'activerecord'
 gem 'hyperresource'
 gem 'pg'
+gem 'rake'
 gem 'tilt-jbuilder'
 gem 'webmachine'
 

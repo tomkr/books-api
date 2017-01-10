@@ -58,6 +58,7 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rainbow (2.2.1)
+    rake (12.0.0)
     rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
@@ -94,10 +95,11 @@ DEPENDENCIES
   hyperresource
   pg
   rack-test
+  rake
   rspec-expectations
   rubocop
   tilt-jbuilder
   webmachine
 
 BUNDLED WITH
-   1.13.6
+   1.13.7
