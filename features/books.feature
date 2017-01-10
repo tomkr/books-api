@@ -30,6 +30,12 @@ Feature: Books
     And the response should have "title" "Title"
     And the response should have a "self" link to "/books/1"
 
+  Scenario: View a book in a series
+    Given a series with title "Mistborn"
+    Given a book with title "The Final Empire" in "Mistborn"
+    And a user requests "/books/1"
+    Then the response should have a "serie" link to "/series/1"
+
   Scenario: Book does not exist
     Given a user requests "/books/1"
     Then the status should be 404
