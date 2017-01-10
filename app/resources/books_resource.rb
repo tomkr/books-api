@@ -1,10 +1,12 @@
 require 'webmachine'
 require './app/models/book'
 require './app/resources/render'
+require './app/sluggify'
 
 # A webmachine resource for the collection of books.
 class BooksResource < Webmachine::Resource
   include Render
+  include Sluggify
 
   def allowed_methods
     %w(GET POST)
@@ -23,7 +25,7 @@ class BooksResource < Webmachine::Resource
   end
 
   def create_path
-    "/books/#{next_id}"
+    "/books/#{slug}"
   end
 
   private
@@ -42,12 +44,15 @@ class BooksResource < Webmachine::Resource
   end
 
   def book
-    @book ||= Book.create(JSON.parse(request.body.to_s)
-      .merge(slug: 'test-slug'))
+    @book ||= Book.create(params.merge(slug: slug))
   end
 
-  def next_id
-    @id ||= Book.maximum(:id) ? Book.maximum(:id).next : 1
+  def slug
+    @slug ||= params['title'] ? sluggify(params['title']) : ''
+  end
+
+  def params
+    @params ||= JSON.parse(request.body.to_s)
   end
 
   def invalid

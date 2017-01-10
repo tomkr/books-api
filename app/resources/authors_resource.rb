@@ -1,10 +1,12 @@
 require 'webmachine'
 require './app/models/author'
 require './app/resources/render'
+require './app/sluggify'
 
 # A webmachine resource for the collection of authors.
 class AuthorsResource < Webmachine::Resource
   include Render
+  include Sluggify
 
   def allowed_methods
     %w(GET POST)
@@ -23,22 +25,25 @@ class AuthorsResource < Webmachine::Resource
   end
 
   def create_path
-    "/authors/#{next_id}"
+    "/authors/#{slug}"
   end
 
   private
 
   def author
-    @author ||= Author.create(JSON.parse(request.body.to_s)
-      .merge(slug: 'test-slug'))
+    @author ||= Author.create(params.merge(slug: slug))
   end
 
   def from_json
     response.body = render(template: 'author', locals: { author: author })
   end
 
-  def next_id
-    @id ||= Author.maximum(:id) ? Author.maximum(:id).next : 1
+  def params
+    @params ||= JSON.parse(request.body.to_s)
+  end
+
+  def slug
+    @slug ||= sluggify(params['name'])
   end
 
   def to_json
