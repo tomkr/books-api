@@ -38,7 +38,7 @@ class AuthorResource < Webmachine::Resource
   end
 
   def author
-    @author ||= Author.find_by(id: id)
+    @author ||= Author.find_by(slug: id)
   end
 
   def id

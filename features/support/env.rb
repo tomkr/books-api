@@ -7,6 +7,7 @@ require './app'
 # Helper module that runs the app as Rack app for tests.
 module AppHelpers
   include Rack::Test::Methods
+  include Sluggify
 
   App.configure do |config|
     config.adapter = :Rack
