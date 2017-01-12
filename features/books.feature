@@ -53,11 +53,13 @@ Feature: Books
     Then the status should be 400
 
   Scenario: Edit a book
-    Given a book with title "A Game of Thrones"
-    And a user puts '{"title": "The Winds of Winter"}' to "/books/a-game-of-thrones"
+    Given an author with name "George R. R. Martin"
+    And a book with title "A Game of Thrones" by "George R. R. Martin"
+    And a user puts '{"title": "The Winds of Winter", "author_id": "george-r-r-martin"}' to "/books/a-game-of-thrones"
     Then the status should be 200
     And the response should have "title" "The Winds of Winter"
     And the response should have a "self" link to "/books/the-winds-of-winter"
+    And the response should have an "author" link to "/authors/george-r-r-martin"
 
   Scenario: Delete a book
     Given a book with title "A Game of Thrones"
