@@ -1,7 +1,7 @@
 json.title serie.title
 
 json._links do
-  json.self { json.href "/series/#{serie.id}" }
-  json.books { json.href "/series/#{serie.id}/books" }
-  json.first_book { json.href "/books/#{books.first.id}" }
+  json.self { json.href "/series/#{serie.slug}" }
+  json.books { json.href "/series/#{serie.slug}/books" }
+  json.first_book { json.href "/books/#{books.first.slug}" }
 end

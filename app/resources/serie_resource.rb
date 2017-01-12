@@ -29,10 +29,10 @@ class SerieResource < Webmachine::Resource
   end
 
   def serie
-    @serie ||= Serie.find_by(id: id)
+    @serie ||= Serie.find_by(slug: slug)
   end
 
-  def id
+  def slug
     request.path_info[:id]
   end
 end
