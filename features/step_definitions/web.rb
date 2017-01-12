@@ -21,7 +21,9 @@ Then(/^the response should have "([^"]*)" "([^"]*)"$/) do |key, value|
   expect(parsed_response[key]).to eq(value)
 end
 
-Then(/^the response should have an? "([^"]*)" link to "([^"]*)"$/) do |key, path|
+Then(
+  /^the response should have an? "([^"]*)" link to "([^"]*)"$/
+) do |key, path|
   expect(parsed_response['_links'][key]['href']).to eq(path)
 end
 
