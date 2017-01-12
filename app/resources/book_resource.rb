@@ -1,10 +1,12 @@
 require 'webmachine'
 require './app/models/book'
 require './app/resources/render'
+require './app/sluggify'
 
 # A webmachine resource representing a book.
 class BookResource < Webmachine::Resource
   include Render
+  include Sluggify
 
   def allowed_methods
     %w(GET PUT DELETE)
@@ -29,7 +31,7 @@ class BookResource < Webmachine::Resource
   private
 
   def from_json
-    book.update(JSON.parse(request.body.to_s))
+    book.update(params.merge(slug: sluggify(params['title'])))
     response.body = render(template: 'book', locals: { book: book })
   end
 
@@ -38,10 +40,14 @@ class BookResource < Webmachine::Resource
   end
 
   def book
-    @book ||= Book.find_by(id: id)
+    @book ||= Book.find_by(slug: slug)
   end
 
-  def id
+  def params
+    @params ||= JSON.parse(request.body.to_s)
+  end
+
+  def slug
     request.path_info[:id]
   end
 end

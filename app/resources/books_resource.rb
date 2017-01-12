@@ -43,8 +43,13 @@ class BooksResource < Webmachine::Resource
            })
   end
 
+  def author
+    @author ||= Author.find_by(slug: params['author_id'])
+  end
+
   def book
-    @book ||= Book.create(params.merge(slug: slug))
+    @book ||= Book.create(params.select { |k, _| ['title'].include? k }
+                  .merge(slug: slug, author: author))
   end
 
   def slug

@@ -21,15 +21,19 @@ class AuthorBooksResource < Webmachine::Resource
     render(template: 'books',
            locals: {
              books: books,
-             self_link: "authors/#{author_id}/books"
+             self_link: "authors/#{author.slug}/books"
            })
   end
 
   def books
-    @books ||= Book.where(author: author_id)
+    @books ||= Book.where(author: author)
   end
 
-  def author_id
+  def author
+    @author ||= Author.find_by(slug: slug)
+  end
+
+  def slug
     request.path_info[:id]
   end
 end
