@@ -1,10 +1,12 @@
 require 'webmachine'
 require './app/models/author'
 require './app/resources/render'
+require './app/sluggify'
 
 # A webmachine resource for the collection of books.
 class AuthorResource < Webmachine::Resource
   include Render
+  include Sluggify
 
   def allowed_methods
     %w(GET PUT DELETE)
@@ -33,15 +35,19 @@ class AuthorResource < Webmachine::Resource
   end
 
   def from_json
-    author.update(JSON.parse(request.body.to_s))
+    author.update(params.merge(slug: sluggify(params['name'])))
     response.body = render(template: 'author', locals: { author: author })
   end
 
   def author
-    @author ||= Author.find_by(slug: id)
+    @author ||= Author.find_by(slug: slug)
   end
 
-  def id
+  def params
+    JSON.parse(request.body.to_s)
+  end
+
+  def slug
     request.path_info[:id]
   end
 end

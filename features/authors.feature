@@ -36,7 +36,7 @@ Feature: Authors
     And a user puts '{"name": "George R. R. Martin"}' to "/authors/brandon-sanderson"
     Then the status should be 200
     And the response should have "name" "George R. R. Martin"
-    And the response should have a "self" link to "/authors/brandon-sanderson"
+    And the response should have a "self" link to "/authors/george-r-r-martin"
 
   Scenario: Delete an author
     Given an author with name "Brandon Sanderson"
