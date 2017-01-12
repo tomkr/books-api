@@ -9,7 +9,7 @@ json._embedded do
     json.name author.name
     json._links do
       json.self do
-        json.href "/authors/#{author.id}"
+        json.href "/authors/#{author.slug}"
       end
     end
   end

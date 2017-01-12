@@ -39,6 +39,13 @@ Then(/^the response has embedded "([^"]*)" with$/) do |list, table|
   end
 end
 
+Then(
+  /^the first of "([^"]*)" has a "([^"]*)" link to "([^"]*)"$/
+) do |list, link, path|
+  list = parsed_response['_embedded'][list]
+  expect(list.first['_links'][link]['href']).to eq(path)
+end
+
 def parsed_response
   JSON.parse(last_response.body)
 end

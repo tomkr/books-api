@@ -11,6 +11,7 @@ Feature: Authors
     And the response has embedded "authors" with
       | name              |
       | Brandon Sanderson |
+    And the first of "authors" has a "self" link to "/authors/brandon-sanderson"
 
   Scenario: Add an author
     Given a user posts '{"name": "George R. R. Martin"}' to "/authors"

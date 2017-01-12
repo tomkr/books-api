@@ -11,6 +11,7 @@ Feature: Books
     And the response has embedded "books" with
       | title            |
       | The Final Empire |
+    And the first of "books" has a "self" link to "/books/the-final-empire"
 
   Scenario: List books for a specific author
     Given an author with name "Brandon Sanderson"

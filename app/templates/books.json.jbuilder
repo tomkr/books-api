@@ -8,7 +8,7 @@ json._embedded do
   json.books books.each do |book|
     json.title book.title
     json._links do
-      json.self { json.href "/books/#{book.id}" }
+      json.self { json.href "/books/#{book.slug}" }
     end
   end
 end
