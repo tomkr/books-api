@@ -1,12 +1,10 @@
 require 'webmachine'
 require './app/models/author'
 require './app/resources/render'
-require './app/sluggify'
 
 # A webmachine resource for the collection of authors.
 class AuthorsResource < Webmachine::Resource
   include Render
-  include Sluggify
 
   def allowed_methods
     %w(GET POST)
@@ -43,7 +41,7 @@ class AuthorsResource < Webmachine::Resource
   end
 
   def slug
-    @slug ||= sluggify(params['name'])
+    @slug ||= Sluggify.sluggify(params['name'])
   end
 
   def to_json

@@ -29,7 +29,7 @@ class BookResource < Webmachine::Resource
   private
 
   def from_json
-    book.update(title: params['title'], author: author)
+    book.update(update_params)
     response.body = render(template: 'book', locals: { book: book })
   end
 
@@ -47,6 +47,14 @@ class BookResource < Webmachine::Resource
 
   def params
     @params ||= JSON.parse(request.body.to_s)
+  end
+
+  def update_params
+    @update_params ||= {
+      title: params['title'],
+      author: author,
+      slug: Sluggify.sluggify(params['title'])
+    }
   end
 
   def slug

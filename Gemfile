@@ -17,5 +17,6 @@ group :test do
 end
 
 group :test, :development do
+  gem 'pry'
   gem 'rubocop', require: false
 end

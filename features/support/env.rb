@@ -1,6 +1,7 @@
 require 'rack/test'
 require 'webmachine/adapters/rack'
 require 'factory_girl'
+require 'pry'
 ENV['ENV'] = 'test'
 require './app'
 

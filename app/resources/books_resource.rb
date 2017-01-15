@@ -1,12 +1,10 @@
 require 'webmachine'
 require './app/models/book'
 require './app/resources/render'
-require './app/sluggify'
 
 # A webmachine resource for the collection of books.
 class BooksResource < Webmachine::Resource
   include Render
-  include Sluggify
 
   def allowed_methods
     %w(GET POST)
@@ -53,7 +51,7 @@ class BooksResource < Webmachine::Resource
   end
 
   def slug
-    @slug ||= params['title'] ? sluggify(params['title']) : ''
+    @slug ||= params['title'] ? Sluggify.sluggify(params['title']) : ''
   end
 
   def params

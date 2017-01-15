@@ -35,7 +35,7 @@ class AuthorResource < Webmachine::Resource
   end
 
   def from_json
-    author.update(params.merge(slug: sluggify(params['name'])))
+    author.update(params.merge(slug: Sluggify.sluggify(params['name'])))
     response.body = render(template: 'author', locals: { author: author })
   end
 

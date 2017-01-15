@@ -23,7 +23,7 @@ class SeriesResource < Webmachine::Resource
   end
 
   def create_path
-    "/series/#{serie.slug}"
+    "/series/#{slug}"
   end
 
   private
@@ -42,10 +42,15 @@ class SeriesResource < Webmachine::Resource
   end
 
   def serie
-    @serie ||= Serie.new(params)
+    @serie ||= Serie.new(params
+      .merge('slug' => Sluggify.sluggify(params['title'])))
   end
 
   def params
     @params ||= JSON.parse(request.body.to_s)
+  end
+
+  def slug
+    @slug = serie.slug
   end
 end
