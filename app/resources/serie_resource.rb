@@ -7,7 +7,11 @@ class SerieResource < Webmachine::Resource
   include Render
 
   def allowed_methods
-    %w(GET)
+    %w(GET PUT)
+  end
+
+  def content_types_accepted
+    [['application/json', :from_json]]
   end
 
   def content_types_provided
@@ -26,6 +30,12 @@ class SerieResource < Webmachine::Resource
              serie: serie,
              books: serie.books
            })
+  end
+
+  def from_json
+    title = JSON.parse(request.body.to_s)['title']
+    serie.update(title: title, slug: Sluggify.sluggify(title))
+    response.body = to_json
   end
 
   def serie

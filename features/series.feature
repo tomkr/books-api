@@ -27,3 +27,10 @@ Feature: Series
     Then the status should be 201
     And the response should have "title" "Mistborn"
     And the response should have a "self" link to "/series/mistborn"
+
+  Scenario: Update a serie
+    Given a serie with title "Mistborn"
+    And a user puts '{"title": "The Reckoners"}' to "/series/mistborn"
+    Then the status should be 200
+    And the response should have "title" "The Reckoners"
+    And the response should have a "self" link to "/series/the-reckoners"
