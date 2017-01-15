@@ -21,3 +21,9 @@ Feature: Series
     And the response should have a "self" link to "/series/mistborn"
     And the response should have a "books" link to "/series/mistborn/books"
     And the response should have a "first_book" link to "/books/the-final-empire"
+
+  Scenario: Add a serie
+    Given a user posts '{"title": "Mistborn"}' to "/series"
+    Then the status should be 201
+    And the response should have "title" "Mistborn"
+    And the response should have a "self" link to "/series/mistborn"
