@@ -32,7 +32,7 @@ Feature: Books
     And the response should have a "self" link to "/books/title"
 
   Scenario: View a book in a series
-    Given a series with title "Mistborn"
+    Given a serie titled "Mistborn"
     Given a book with title "The Final Empire" in "Mistborn"
     And a user requests "/books/the-final-empire"
     Then the response should have a "serie" link to "/series/1"
