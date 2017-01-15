@@ -7,7 +7,7 @@ class SerieResource < Webmachine::Resource
   include Render
 
   def allowed_methods
-    %w(GET PUT)
+    %w(GET PUT DELETE)
   end
 
   def content_types_accepted
@@ -16,6 +16,10 @@ class SerieResource < Webmachine::Resource
 
   def content_types_provided
     [['application/hal+json', :to_json]]
+  end
+
+  def delete_resource
+    serie.destroy
   end
 
   def resource_exists?

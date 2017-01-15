@@ -34,3 +34,8 @@ Feature: Series
     Then the status should be 200
     And the response should have "title" "The Reckoners"
     And the response should have a "self" link to "/series/the-reckoners"
+
+  Scenario: Delete a serie
+    Given a serie with title "Mistborn"
+    And a user deletes "/series/mistborn"
+    Then the status should be 204
