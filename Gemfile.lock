@@ -109,5 +109,8 @@ DEPENDENCIES
   tilt-jbuilder
   webmachine
 
+RUBY VERSION
+   ruby 2.4.0p0
+
 BUNDLED WITH
    1.13.7
