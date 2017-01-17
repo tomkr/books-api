@@ -7,3 +7,8 @@ AllCops:
 Style/Documentation:
   Exclude:
     - db/**/*
+
+# Webmachine hooks use this name sometimes.
+Style/PredicateName:
+  Exclude:
+    - app/resources/**/*

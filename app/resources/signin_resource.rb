@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'jwt'
 require 'webmachine'
 require './app/resources/render'
 require './app/models/user'

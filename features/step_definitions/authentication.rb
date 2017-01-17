@@ -5,6 +5,19 @@ Given(
   create(:user, username: username, password: password)
 end
 
+Given(
+  /^a user requests "([^"]*)" with a token for username "([^"]*)"$/
+) do |path, username|
+  jwt = User.find_by(username: username).jwt
+  header 'Authorization', "Bearer #{jwt}"
+  get path
+end
+
+Given(/^a user requests "([^"]*)" with a different scheme$/) do |path|
+  header 'Authorization', 'Test token'
+  get path
+end
+
 Then(/^the response should have jwt with "([^"]*)" "([^"]*)"$/) do |key, value|
   jwt = parsed_response['jwt']
   decoded_jwt = JWT.decode jwt, 'secret', true, algorithm: 'HS256'
