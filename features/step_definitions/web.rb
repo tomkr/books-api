@@ -18,6 +18,10 @@ Given(/^a user deletes "([^"]*)"$/) do |path|
   delete path
 end
 
+Then(/^the response should have "([^"]*)"$/) do |key|
+  expect(parsed_response[key]).to be_present
+end
+
 Then(/^the response should have "([^"]*)" "([^"]*)"$/) do |key, value|
   expect(parsed_response[key]).to eq(value)
 end
