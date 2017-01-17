@@ -15,4 +15,9 @@ FactoryGirl.define do
     title 'Test serie title'
     slug 'test-serie-title'
   end
+
+  factory :user do
+    username 'test'
+    password 'password'
+  end
 end

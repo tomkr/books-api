@@ -27,14 +27,11 @@ class SignupResource < Webmachine::Resource
   private
 
   def from_json
-    response.body = render(template: 'user', locals: { user: user, jwt: jwt })
+    user.save
+    response.body = render(template: 'user', locals: { user: user })
   end
 
   def user
-    @user ||= OpenStruct.new(username: 'tom')
-  end
-
-  def jwt
-    @jwt ||= JWT.encode({ username: user.username }, 'secret', 'HS256')
+    @user ||= User.new(username: 'tom', password: 'password')
   end
 end
