@@ -5,6 +5,7 @@ require 'factory_girl'
 require 'pry'
 ENV['DATABASE_URL'] = ENV['TEST_DATABASE_URL']
 require './app'
+require './app/sluggify'
 
 # Helper module that runs the app as Rack app for tests.
 module AppHelpers

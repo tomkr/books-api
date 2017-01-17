@@ -1,14 +1,11 @@
 # frozen_string_literal: true
-require 'webmachine'
 require './app/models/serie'
-require './app/resources/render'
+require './app/resources/base_resource'
 
 # A webmachine resource for the collection of series.
-class SeriesResource < Webmachine::Resource
-  include Render
-
+class SeriesResource < BaseResource
   def allowed_methods
-    %w(GET POST)
+    %w(GET OPTIONS POST)
   end
 
   def content_types_accepted

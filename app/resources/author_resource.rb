@@ -1,16 +1,11 @@
 # frozen_string_literal: true
-require 'webmachine'
+require './app/resources/base_resource'
 require './app/models/author'
-require './app/resources/render'
-require './app/sluggify'
 
 # A webmachine resource for the collection of books.
-class AuthorResource < Webmachine::Resource
-  include Render
-  include Sluggify
-
+class AuthorResource < BaseResource
   def allowed_methods
-    %w(GET PUT DELETE)
+    %w(OPTIONS GET PUT DELETE)
   end
 
   def content_types_accepted

@@ -1,11 +1,8 @@
 # frozen_string_literal: true
-require 'webmachine'
-require './app/resources/render'
+require './app/resources/base_resource'
 
 # A webmachine resource for the collection of books.
-class ApiResource < Webmachine::Resource
-  include Render
-
+class ApiResource < BaseResource
   def allowed_methods
     %w(GET)
   end

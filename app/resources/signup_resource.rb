@@ -1,15 +1,11 @@
 # frozen_string_literal: true
-require 'jwt'
-require 'webmachine'
-require 'ostruct'
-require './app/resources/render'
+require './app/resources/base_resource'
+require './app/models/user'
 
 # Resource for creating a user.
-class SignupResource < Webmachine::Resource
-  include Render
-
+class SignupResource < BaseResource
   def allowed_methods
-    %w(POST)
+    %w(OPTIONS POST)
   end
 
   def content_types_accepted

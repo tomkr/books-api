@@ -1,14 +1,11 @@
 # frozen_string_literal: true
-require 'webmachine'
-require './app/resources/render'
+require './app/resources/base_resource'
 require './app/models/user'
 
 # Resource for signing a user in.
-class SigninResource < Webmachine::Resource
-  include Render
-
+class SigninResource < BaseResource
   def allowed_methods
-    %w(POST)
+    %w(OPTIONS POST)
   end
 
   def process_post

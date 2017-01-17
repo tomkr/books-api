@@ -1,14 +1,11 @@
 # frozen_string_literal: true
-require 'webmachine'
+require './app/resources/base_resource'
 require './app/models/book'
-require './app/resources/render'
 
 # A webmachine resource representing a book.
-class BookResource < Webmachine::Resource
-  include Render
-
+class BookResource < BaseResource
   def allowed_methods
-    %w(GET PUT DELETE)
+    %w(OPTIONS GET PUT DELETE)
   end
 
   def content_types_accepted

@@ -1,13 +1,10 @@
 # frozen_string_literal: true
-require 'webmachine'
+require './app/resources/base_resource'
 require './app/models/author'
 require './app/models/book'
-require './app/resources/render'
 
 # A webmachine resource for the collection of books by a single author.
-class AuthorBooksResource < Webmachine::Resource
-  include Render
-
+class AuthorBooksResource < BaseResource
   def allowed_methods
     %w(GET)
   end

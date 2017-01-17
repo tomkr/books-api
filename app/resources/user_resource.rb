@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 require 'jwt'
-require 'webmachine'
-require './app/resources/render'
+require './app/resources/base_resource'
 require './app/models/user'
 
 # Resource for getting user data.
-class UserResource < Webmachine::Resource
-  include Render
-
+class UserResource < BaseResource
   AUTH_MESSAGE = 'Bearer error="invalid_token"'
 
   def is_authorized?(authorization_header)
@@ -27,7 +24,7 @@ class UserResource < Webmachine::Resource
   end
 
   def allowed_methods
-    %w(GET)
+    %w(OPTIONS GET)
   end
 
   def content_types_provided
