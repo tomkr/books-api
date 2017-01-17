@@ -104,6 +104,7 @@ DEPENDENCIES
   jwt
   pg
   pry
+  rack
   rack-test
   rake
   rspec-expectations
