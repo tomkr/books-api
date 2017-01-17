@@ -3,7 +3,7 @@ require 'rack/test'
 require 'webmachine/adapters/rack'
 require 'factory_girl'
 require 'pry'
-ENV['ENV'] = 'test'
+ENV['DATABASE_URL'] = ENV['TEST_DATABASE_URL']
 require './app'
 
 # Helper module that runs the app as Rack app for tests.
