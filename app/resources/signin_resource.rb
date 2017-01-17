@@ -13,6 +13,7 @@ class SigninResource < Webmachine::Resource
   end
 
   def process_post
+    return 400 if user.blank?
     response.body = render(template: 'user', locals: { user: user })
     true
   end
@@ -24,6 +25,6 @@ class SigninResource < Webmachine::Resource
   end
 
   def params
-    @params ||= JSON.parse(request.body.to_s)
+    @params ||= JSON.parse(request.body.to_s).slice('username', 'password')
   end
 end

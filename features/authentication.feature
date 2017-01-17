@@ -17,3 +17,8 @@ Feature: Authentication
     And the response should have a "self" link to "/users/tom"
     And the response should have "username" "tom"
     And the response should have jwt with "username" "tom"
+
+  Scenario: Invalid signin
+    Given a user with username "tom" and password "password"
+    Given a user posts '{"username": "tom", "password": "wrong"}' to "/signin"
+    Then the status should be 400
