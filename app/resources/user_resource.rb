@@ -15,7 +15,8 @@ class UserResource < Webmachine::Resource
     parsed_header = authorization_header.match(/^Bearer (.*)$/)
     return AUTH_MESSAGE if parsed_header.blank?
     jwt = parsed_header[1]
-    decoded_jwt = JWT.decode jwt, 'secret', true, algorithm: 'HS256'
+    decoded_jwt = JWT.decode(jwt, ENV.fetch('AUTH_SECRET'), true,
+                             algorithm: 'HS256')
     @authenticated_user = decoded_jwt.first['username']
     authenticated_user.present?
   end
