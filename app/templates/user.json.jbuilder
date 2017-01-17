@@ -1,5 +1,6 @@
+# frozen_string_literal: true
 json.username user.username
-json.jwt 'token'
+json.jwt jwt
 
 json._links do
   json.self { json.href "/users/#{user.username}" }

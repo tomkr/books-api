@@ -8,4 +8,4 @@ Feature: Authentication
     Then the status should be 201
     And the response should have a "self" link to "/users/tom"
     And the response should have "username" "tom"
-    And the response should have "jwt"
+    And the response should have jwt with "username" "tom"

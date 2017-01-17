@@ -18,10 +18,6 @@ Given(/^a user deletes "([^"]*)"$/) do |path|
   delete path
 end
 
-Then(/^the response should have "([^"]*)"$/) do |key|
-  expect(parsed_response[key]).to be_present
-end
-
 Then(/^the response should have "([^"]*)" "([^"]*)"$/) do |key, value|
   expect(parsed_response[key]).to eq(value)
 end
@@ -51,8 +47,4 @@ Then(
 ) do |list, link, path|
   list = parsed_response['_embedded'][list]
   expect(list.first['_links'][link]['href']).to eq(path)
-end
-
-def parsed_response
-  JSON.parse(last_response.body)
 end

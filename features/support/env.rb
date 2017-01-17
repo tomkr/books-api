@@ -19,6 +19,10 @@ module AppHelpers
     App.adapter
   end
 
+  def parsed_response
+    JSON.parse(last_response.body)
+  end
+
   FactoryGirl.find_definitions
 end
 

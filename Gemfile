@@ -5,6 +5,7 @@ ruby '2.3.3'
 
 gem 'activerecord'
 gem 'hyperresource'
+gem 'jwt'
 gem 'pg'
 gem 'rake'
 gem 'tilt-jbuilder'
