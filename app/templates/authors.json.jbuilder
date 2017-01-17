@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 json._links do
   json.self do
     json.href '/authors'

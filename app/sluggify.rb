@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Function to easily create slugs.
 module Sluggify
   def self.sluggify(name)

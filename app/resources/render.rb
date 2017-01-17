@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'tilt/jbuilder'
 
 # Provides an easier render method for resources that need it.

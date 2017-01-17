@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 json.name author.name
 
 json._links do

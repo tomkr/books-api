@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'webmachine'
 require './app/models/book'
 require './app/resources/render'

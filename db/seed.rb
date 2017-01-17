@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require './db/config'
 require './app/models/author'
 require './app/models/book'

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Collection of step definitions to do with handling general requests and
 # responses.
 

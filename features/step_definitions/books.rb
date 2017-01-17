@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Given(/^a book with title "([^"]*)"$/) do |title|
   create(:book, title: title, slug: Sluggify.sluggify(title))
 end

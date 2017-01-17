@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'active_record'
 
 config_dir = File.expand_path('../../config', __FILE__)

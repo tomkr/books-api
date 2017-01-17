@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require './app/resources/api_resource'
 require './app/resources/author_resource'
 require './app/resources/author_books_resource'
