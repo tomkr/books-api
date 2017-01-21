@@ -3,6 +3,7 @@ require './db/config'
 require './app/models/author'
 require './app/models/book'
 require './app/models/serie'
+require './app/sluggify'
 
 # Help creating slugs
 def sluggify_params(field_to_sluggify, params)
@@ -23,19 +24,27 @@ ice_and_fire = Serie.create(sluggify_params(:title,
 
 Book.create(sluggify_params(:title, title: 'Elantris', author: sanderson))
 Book.create(sluggify_params(:title, title: 'The Final Empire',
-                                    author: sanderson, serie: mistborn))
+                                    author: sanderson, serie: mistborn,
+                                    position: 1))
 Book.create(sluggify_params(:title, title: 'The Well of Ascension',
-                                    author: sanderson, serie: mistborn))
+                                    author: sanderson, serie: mistborn,
+                                    position: 2))
 Book.create(sluggify_params(:title, title: 'The Hero of Ages',
-                                    author: sanderson, serie: mistborn))
+                                    author: sanderson, serie: mistborn,
+                                    position: 3))
 
 Book.create(sluggify_params(:title, title: 'A Game of Thrones',
-                                    author: martin, serie: ice_and_fire))
+                                    author: martin, serie: ice_and_fire,
+                                    position: 1))
 Book.create(sluggify_params(:title, title: 'A Clash of Kings',
-                                    author: martin, serie: ice_and_fire))
+                                    author: martin, serie: ice_and_fire,
+                                    position: 2))
 Book.create(sluggify_params(:title, title: 'A Storm of Swords',
-                                    author: martin, serie: ice_and_fire))
+                                    author: martin, serie: ice_and_fire,
+                                    position: 3))
 Book.create(sluggify_params(:title, title: 'A Feast for Crows',
-                                    author: martin, serie: ice_and_fire))
+                                    author: martin, serie: ice_and_fire,
+                                    position: 4))
 Book.create(sluggify_params(:title, title: 'A Dance with Dragons',
-                                    author: martin, serie: ice_and_fire))
+                                    author: martin, serie: ice_and_fire,
+                                    position: 5))
