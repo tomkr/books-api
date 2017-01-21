@@ -16,3 +16,11 @@ Given(/^a book with title "([^"]*)" in "([^"]*)"$/) do |title, serie_title|
   create(:book, title: title, slug: Sluggify.sluggify(title),
                 serie: Serie.find_by(title: serie_title))
 end
+
+Given(
+  /^a book with title "([^"]*)" in "([^"]*)" at (\d+)$/
+) do |title, serie_title, position|
+  create(:book, title: title, slug: Sluggify.sluggify(title),
+                serie: Serie.find_by(title: serie_title),
+                position: position)
+end

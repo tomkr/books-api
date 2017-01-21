@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 6) do
+ActiveRecord::Schema.define(version: 7) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 6) do
     t.integer  "serie_id"
     t.integer  "serie_position"
     t.string   "slug",           null: false
+    t.integer  "position"
     t.index ["author_id"], name: "index_books_on_author_id", using: :btree
     t.index ["serie_id"], name: "index_books_on_serie_id", using: :btree
   end

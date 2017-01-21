@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 FactoryGirl.define do
   factory :author do
-    name 'Test Name'
+    sequence(:name) { |i| "Test name #{i}" }
     sequence(:slug) { |i| "test-name-#{i}" }
   end
 

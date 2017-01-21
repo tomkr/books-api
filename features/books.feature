@@ -45,9 +45,13 @@ Feature: Books
 
   Scenario: View a book in a series
     Given a serie titled "Mistborn"
-    Given a book with title "The Final Empire" in "Mistborn"
-    And a user requests "/books/the-final-empire"
+    And a book with title "The Final Empire" in "Mistborn" at 1
+    And a book with title "The Well of Ascension" in "Mistborn" at 2
+    And a book with title "The Hero of Ages" in "Mistborn" at 3
+    And a user requests "/books/the-well-of-ascension"
     Then the response should have a "serie" link to "/series/mistborn"
+    And the response should have a "prev" link to "/books/the-final-empire"
+    And the response should have a "next" link to "/books/the-hero-of-ages"
 
   Scenario: Book does not exist
     Given a user requests "/books/title"
