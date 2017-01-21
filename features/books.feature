@@ -25,6 +25,17 @@ Feature: Books
       | The Final Empire |
     And the first of "books" has a "self" link to "/books/the-final-empire"
 
+  Scenario: List books in a serie
+    Given a serie titled "Mistborn"
+    And a book with title "The Final Empire" in "Mistborn"
+    And a user requests "/series/mistborn/books"
+    Then the status should be 200
+    And the response should have a "self" link to "/series/mistborn/books"
+    And the response has embedded "books" with
+      | title            |
+      | The Final Empire |
+    And the first of "books" has a "self" link to "/books/the-final-empire"
+
   Scenario: View a book
     Given a book with title "Title"
     And a user requests "/books/title"
