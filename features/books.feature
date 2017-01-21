@@ -35,7 +35,7 @@ Feature: Books
     Given a serie titled "Mistborn"
     Given a book with title "The Final Empire" in "Mistborn"
     And a user requests "/books/the-final-empire"
-    Then the response should have a "serie" link to "/series/1"
+    Then the response should have a "serie" link to "/series/mistborn"
 
   Scenario: Book does not exist
     Given a user requests "/books/title"
