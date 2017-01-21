@@ -17,12 +17,13 @@ Feature: Books
     Given an author with name "Brandon Sanderson"
     And a book with title "The Final Empire" by "Brandon Sanderson"
     And a book with title "Game of Thrones"
-    And a user requests "authors/brandon-sanderson/books"
+    And a user requests "/authors/brandon-sanderson/books"
     Then the status should be 200
-    And the response should have a "self" link to "authors/brandon-sanderson/books"
+    And the response should have a "self" link to "/authors/brandon-sanderson/books"
     And the response has embedded "books" with
       | title            |
       | The Final Empire |
+    And the first of "books" has a "self" link to "/books/the-final-empire"
 
   Scenario: View a book
     Given a book with title "Title"

@@ -19,7 +19,7 @@ class AuthorBooksResource < BaseResource
     render(template: 'books',
            locals: {
              books: books,
-             self_link: "authors/#{author.slug}/books"
+             self_link: "/authors/#{author.slug}/books"
            })
   end
 
