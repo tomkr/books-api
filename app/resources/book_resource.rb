@@ -27,7 +27,7 @@ class BookResource < BaseResource
   private
 
   def from_json
-    book.update(update_params)
+    return invalid unless book.update(update_params)
     response.body = render(template: 'book', locals: { book: book })
   end
 
@@ -44,7 +44,7 @@ class BookResource < BaseResource
   end
 
   def params
-    @params ||= JSON.parse(request.body.to_s)
+    @params ||= JSON.parse(request.body.to_s).slice('title', 'author_id')
   end
 
   def update_params
@@ -57,5 +57,10 @@ class BookResource < BaseResource
 
   def slug
     request.path_info[:id]
+  end
+
+  def invalid
+    response.body = book.errors.to_json
+    400
   end
 end

@@ -77,6 +77,12 @@ Feature: Books
     And the response should have a "self" link to "/books/the-winds-of-winter"
     And the response should have an "author" link to "/authors/george-r-r-martin"
 
+  Scenario: Add a malformed book
+    Given an author with name "George R. R. Martin"
+    And a book with title "A Game of Thrones" by "George R. R. Martin"
+    And a user puts '{"title": "The Winds of Winter"}' to "/books/a-game-of-thrones"
+    Then the status should be 400
+
   Scenario: Delete a book
     Given a book with title "A Game of Thrones"
     And a user deletes "/books/a-game-of-thrones"
