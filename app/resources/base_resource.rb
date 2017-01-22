@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'webmachine'
-require './app/resources/render'
-require './app/sluggify'
+require './app/lib/render'
+require './app/lib/sluggify'
 
 # Base resource that does some setup for all other resources through
 # inheritance.

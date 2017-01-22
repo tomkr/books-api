@@ -1,8 +1,7 @@
 # frozen_string_literal: true
-require 'jwt'
 require './app/resources/base_resource'
 require './app/models/user'
-require './app/resources/authenticateable'
+require './app/lib/authenticateable'
 
 # Resource for getting user data.
 class UserResource < BaseResource
