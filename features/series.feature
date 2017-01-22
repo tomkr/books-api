@@ -39,6 +39,11 @@ Feature: Series
     And the response should have "title" "The Reckoners"
     And the response should have a "self" link to "/series/the-reckoners"
 
+  Scenario: Update a malformed serie
+    Given a serie titled "Mistborn"
+    And a user puts '{}' to "/series/mistborn"
+    Then the status should be 400
+
   Scenario: Delete a serie
     Given a serie titled "Mistborn"
     And a user deletes "/series/mistborn"

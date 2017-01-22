@@ -35,8 +35,8 @@ class SerieResource < BaseResource
   end
 
   def from_json
-    title = JSON.parse(request.body.to_s)['title']
-    serie.update(title: title, slug: Sluggify.sluggify(title))
+    return invalid unless
+      serie.update(params.merge(slug: Sluggify.sluggify(params['title'])))
     response.body = to_json
   end
 
@@ -45,6 +45,15 @@ class SerieResource < BaseResource
   end
 
   def slug
-    request.path_info[:id]
+    @slug ||= request.path_info[:id]
+  end
+
+  def params
+    @params ||= JSON.parse(request.body.to_s).slice('title')
+  end
+
+  def invalid
+    response.body = serie.errors.to_json
+    400
   end
 end
