@@ -28,6 +28,10 @@ Feature: Series
     And the response should have "title" "Mistborn"
     And the response should have a "self" link to "/series/mistborn"
 
+  Scenario: Add a malformed serie
+    Given a user posts '{}' to "/series"
+    Then the status should be 400
+
   Scenario: Update a serie
     Given a serie titled "Mistborn"
     And a user puts '{"title": "The Reckoners"}' to "/series/mistborn"

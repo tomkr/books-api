@@ -27,7 +27,7 @@ class SeriesResource < BaseResource
   private
 
   def from_json
-    serie.save
+    return invalid unless serie.save
     response.body = render(template: 'serie', locals: { serie: serie })
   end
 
@@ -45,10 +45,15 @@ class SeriesResource < BaseResource
   end
 
   def params
-    @params ||= JSON.parse(request.body.to_s)
+    @params ||= JSON.parse(request.body.to_s).slice('title')
   end
 
   def slug
     @slug = serie.slug
+  end
+
+  def invalid
+    response.body = serie.errors.to_json
+    400
   end
 end
