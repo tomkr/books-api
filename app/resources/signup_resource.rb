@@ -23,11 +23,20 @@ class SignupResource < BaseResource
   private
 
   def from_json
-    user.save
+    return invalid unless user.save
     response.body = render(template: 'user', locals: { user: user })
   end
 
   def user
-    @user ||= User.new(username: 'tom', password: 'password')
+    @user ||= User.new(params)
+  end
+
+  def params
+    @params ||= JSON.parse(request.body.to_s).slice('username', 'password')
+  end
+
+  def invalid
+    response.body = user.errors.to_json
+    400
   end
 end
