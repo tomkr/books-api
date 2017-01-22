@@ -27,15 +27,16 @@ class AuthorsResource < BaseResource
   private
 
   def author
-    @author ||= Author.create(params.merge(slug: slug))
+    @author ||= Author.new(params.merge(slug: slug))
   end
 
   def from_json
+    return invalid unless author.save
     response.body = render(template: 'author', locals: { author: author })
   end
 
   def params
-    @params ||= JSON.parse(request.body.to_s)
+    @params ||= JSON.parse(request.body.to_s).slice('name')
   end
 
   def slug
@@ -44,5 +45,10 @@ class AuthorsResource < BaseResource
 
   def to_json
     render(template: 'authors', locals: { authors: Author.all })
+  end
+
+  def invalid
+    response.body = author.errors.to_json
+    400
   end
 end

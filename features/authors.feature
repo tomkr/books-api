@@ -19,6 +19,10 @@ Feature: Authors
     And the response should have "name" "George R. R. Martin"
     And the response should have a "self" link to "/authors/george-r-r-martin"
 
+  Scenario: Add a malformed author
+    Given a user posts '{}' to "/authors"
+    Then the status should be 400
+
   Scenario: View an author
     Given an author with name "Brandon Sanderson"
     And a book with author "Brandon Sanderson"
