@@ -26,13 +26,14 @@ class AuthorResource < BaseResource
 
   private
 
-  def to_json
-    render(template: 'author', locals: { author: author })
+  def from_json
+    return invalid unless author.update(params
+      .merge(slug: Sluggify.sluggify(params['name'])))
+    response.body = render(template: 'author', locals: { author: author })
   end
 
-  def from_json
-    author.update(params.merge(slug: Sluggify.sluggify(params['name'])))
-    response.body = render(template: 'author', locals: { author: author })
+  def to_json
+    render(template: 'author', locals: { author: author })
   end
 
   def author
@@ -40,10 +41,15 @@ class AuthorResource < BaseResource
   end
 
   def params
-    JSON.parse(request.body.to_s)
+    @params ||= JSON.parse(request.body.to_s).slice('name')
   end
 
   def slug
-    request.path_info[:id]
+    @slug ||= request.path_info[:id]
+  end
+
+  def invalid
+    response.body = author.errors.to_json
+    400
   end
 end

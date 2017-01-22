@@ -43,6 +43,11 @@ Feature: Authors
     And the response should have "name" "George R. R. Martin"
     And the response should have a "self" link to "/authors/george-r-r-martin"
 
+  Scenario: Edit a malformed author
+    Given an author with name "Brandon Sanderson"
+    And a user puts '{}' to "/authors/brandon-sanderson"
+    Then the status should be 400
+
   Scenario: Delete an author
     Given an author with name "Brandon Sanderson"
     And a user deletes "/authors/brandon-sanderson"
