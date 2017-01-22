@@ -4,7 +4,7 @@ require './app/resources/base_resource'
 # A webmachine resource for the collection of books.
 class ApiResource < BaseResource
   def allowed_methods
-    %w(GET)
+    %w(OPTIONS GET)
   end
 
   def content_types_provided
