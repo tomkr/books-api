@@ -9,6 +9,7 @@ gem 'jwt'
 gem 'pg'
 gem 'rack'
 gem 'rake'
+gem 'thor'
 gem 'tilt-jbuilder'
 gem 'webmachine'
 
