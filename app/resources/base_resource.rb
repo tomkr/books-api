@@ -12,6 +12,7 @@ class BaseResource < Webmachine::Resource
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Allow-Methods'] = allowed_methods.join(',')
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    response.headers['Access-Control-Allow-Headers'] =
+      'Content-Type, Authorization'
   end
 end
