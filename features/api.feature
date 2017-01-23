@@ -7,7 +7,7 @@ Feature: API
     Given a user requests "/"
     Then the status should be 200
     And the response should have a "self" link to "/"
-    And the response should have a "books" link to "/books"
+    And the response should have a "books" link to "/books{?author,serie}"
     And the response should have an "authors" link to "/authors"
     And the response should have an "series" link to "/series"
     And the response should have an "signin" link to "/signin"

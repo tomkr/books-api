@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 json._links do
   json.self { json.href '/' }
-  json.books { json.href '/books' }
+  json.books do
+    json.href '/books{?author,serie}'
+    json.templated true
+  end
   json.authors { json.href '/authors' }
   json.series { json.href '/series' }
   json.signup { json.href '/signup' }
