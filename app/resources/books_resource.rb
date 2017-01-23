@@ -28,7 +28,7 @@ class BooksResource < BaseResource
   private
 
   def from_json
-    return invalid unless book.valid?
+    return invalid unless book.save
     response.body = render(template: 'book', locals: { book: book })
   end
 
