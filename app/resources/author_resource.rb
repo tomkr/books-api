@@ -27,8 +27,7 @@ class AuthorResource < BaseResource
   private
 
   def from_json
-    return invalid unless author.update(params
-      .merge(slug: Sluggify.sluggify(params['name'])))
+    return invalid unless author.update(update_params)
     response.body = render(template: 'author', locals: { author: author })
   end
 
@@ -44,8 +43,12 @@ class AuthorResource < BaseResource
     @params ||= JSON.parse(request.body.to_s).slice('name')
   end
 
+  def update_params
+    @update_params ||= params.merge(slug: Sluggify.sluggify(params['name']))
+  end
+
   def slug
-    @slug ||= request.path_info[:id]
+    @slug ||= request.path_info[:slug]
   end
 
   def invalid

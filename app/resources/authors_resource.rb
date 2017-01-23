@@ -21,13 +21,15 @@ class AuthorsResource < BaseResource
   end
 
   def create_path
-    "/authors/#{slug}"
+    "/authors/#{author.slug}"
   end
 
   private
 
   def author
-    @author ||= Author.new(params.merge(slug: slug))
+    @author ||= Author.new(
+      params.merge(slug: Sluggify.sluggify(params['name']))
+    )
   end
 
   def from_json
@@ -37,10 +39,6 @@ class AuthorsResource < BaseResource
 
   def params
     @params ||= JSON.parse(request.body.to_s).slice('name')
-  end
-
-  def slug
-    @slug ||= Sluggify.sluggify(params['name'])
   end
 
   def to_json

@@ -7,7 +7,7 @@ App = Webmachine::Application.new do |app|
   app.routes do
     add [], ApiResource
     add ['authors'], AuthorsResource
-    add ['authors', :id], AuthorResource
+    add ['authors', :slug], AuthorResource
     add ['books'], BooksResource
     add ['books', :slug], BookResource
     add ['series'], SeriesResource
