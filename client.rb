@@ -13,5 +13,3 @@ class Client < Thor
   desc 'series', 'manage series'
   subcommand 'series', Series
 end
-
-Client.start(ARGV)
