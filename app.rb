@@ -8,12 +8,10 @@ App = Webmachine::Application.new do |app|
     add [], ApiResource
     add ['authors'], AuthorsResource
     add ['authors', :id], AuthorResource
-    add ['authors', :id, 'books'], AuthorBooksResource
     add ['books'], BooksResource
     add ['books', :id], BookResource
     add ['series'], SeriesResource
     add ['series', :id], SerieResource
-    add ['series', :id, 'books'], SerieBooksResource
     add ['signin'], SigninResource
     add ['signup'], SignupResource
     add ['users', :username], UserResource

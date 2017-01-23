@@ -7,7 +7,7 @@ Feature: Books
     Given a book with title "The Final Empire"
     And a user requests "/books"
     Then the status should be 200
-    And the response should have a "self" link to "/books"
+    And the response should have a "self" link to "/books{?author,serie}"
     And the response has embedded "books" with
       | title            |
       | The Final Empire |
@@ -17,9 +17,10 @@ Feature: Books
     Given an author with name "Brandon Sanderson"
     And a book with title "The Final Empire" by "Brandon Sanderson"
     And a book with title "Game of Thrones"
-    And a user requests "/authors/brandon-sanderson/books"
+    And a user requests "/books?author=brandon-sanderson"
     Then the status should be 200
-    And the response should have a "self" link to "/authors/brandon-sanderson/books"
+    And the response should have a "self" link to "/books{?author,serie}"
+    And the response should have an "author" link to "/authors/brandon-sanderson"
     And the response has embedded "books" with
       | title            |
       | The Final Empire |
@@ -28,9 +29,10 @@ Feature: Books
   Scenario: List books in a serie
     Given a serie titled "Mistborn"
     And a book with title "The Final Empire" in "Mistborn"
-    And a user requests "/series/mistborn/books"
+    And a user requests "/books?serie=mistborn"
     Then the status should be 200
-    And the response should have a "self" link to "/series/mistborn/books"
+    And the response should have a "self" link to "/books{?author,serie}"
+    And the response should have a "serie" link to "/series/mistborn"
     And the response has embedded "books" with
       | title            |
       | The Final Empire |

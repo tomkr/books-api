@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require './app/resources/base_resource'
 require './app/models/book'
+require './app/lib/books_query'
 
 # A webmachine resource for the collection of books.
 class BooksResource < BaseResource
@@ -34,8 +35,9 @@ class BooksResource < BaseResource
   def to_json
     render(template: 'books',
            locals: {
-             books: Book.all,
-             self_link: '/books'
+             books: query.execute,
+             author: query.author,
+             serie: query.serie
            })
   end
 
@@ -44,16 +46,24 @@ class BooksResource < BaseResource
   end
 
   def book
-    @book ||= Book.create(params.select { |k, _| ['title'].include? k }
-                  .merge(slug: slug, author: author))
+    @book ||= Book.new(params.merge(slug: slug, author: author))
+  end
+
+  def books
+    @books ||= Book.where(search_query)
   end
 
   def slug
-    @slug ||= params['title'] ? Sluggify.sluggify(params['title']) : ''
+    @slug ||= Sluggify.sluggify(params['title'])
   end
 
   def params
     @params ||= JSON.parse(request.body.to_s)
+  end
+
+  def query
+    @query ||= BooksQuery.new(request.query.slice('author', 'serie')
+      .symbolize_keys)
   end
 
   def invalid
