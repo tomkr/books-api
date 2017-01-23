@@ -22,7 +22,7 @@ class BooksResource < BaseResource
   end
 
   def create_path
-    "/books/#{slug}"
+    "/books/#{book.slug}"
   end
 
   private
@@ -41,20 +41,16 @@ class BooksResource < BaseResource
            })
   end
 
-  def author
-    @author ||= Author.find_by(slug: params['author_id'])
-  end
-
   def book
-    @book ||= Book.new(params.merge(slug: slug, author: author))
+    @book ||= Book.new(params
+      .merge(
+        slug: Sluggify.sluggify(params['title']),
+        author: Author.find_by(slug: params['author_id'])
+      ))
   end
 
   def books
     @books ||= Book.where(search_query)
-  end
-
-  def slug
-    @slug ||= Sluggify.sluggify(params['title'])
   end
 
   def params
