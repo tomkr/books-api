@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 json._links do
-  json.self do
-    json.href self_link
-  end
+  json.self { json.href '/series' }
 end
 
 json._embedded do

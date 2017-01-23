@@ -11,7 +11,7 @@ App = Webmachine::Application.new do |app|
     add ['books'], BooksResource
     add ['books', :slug], BookResource
     add ['series'], SeriesResource
-    add ['series', :id], SerieResource
+    add ['series', :slug], SerieResource
     add ['signin'], SigninResource
     add ['signup'], SignupResource
     add ['users', :username], UserResource

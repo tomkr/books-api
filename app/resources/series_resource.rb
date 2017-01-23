@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-require './app/models/serie'
 require './app/resources/base_resource'
+require './app/models/serie'
 
 # A webmachine resource for the collection of series.
 class SeriesResource < BaseResource
@@ -21,7 +21,7 @@ class SeriesResource < BaseResource
   end
 
   def create_path
-    "/series/#{slug}"
+    "/series/#{serie.slug}"
   end
 
   private
@@ -32,24 +32,17 @@ class SeriesResource < BaseResource
   end
 
   def to_json
-    render(template: 'series',
-           locals: {
-             series: Serie.all,
-             self_link: '/series'
-           })
+    render(template: 'series', locals: { series: Serie.all })
   end
 
   def serie
-    @serie ||= Serie.new(params
-      .merge('slug' => Sluggify.sluggify(params['title'])))
+    @serie ||= Serie.new(
+      params.merge(slug: Sluggify.sluggify(params['title']))
+    )
   end
 
   def params
     @params ||= JSON.parse(request.body.to_s).slice('title')
-  end
-
-  def slug
-    @slug = serie.slug
   end
 
   def invalid
