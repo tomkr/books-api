@@ -35,10 +35,6 @@ class BookResource < BaseResource
     render(template: 'book', locals: { book: book })
   end
 
-  def author
-    @author ||= Author.find_by(slug: params['author_id'])
-  end
-
   def book
     @book ||= Book.find_by(slug: slug)
   end
@@ -50,13 +46,13 @@ class BookResource < BaseResource
   def update_params
     @update_params ||= {
       title: params['title'],
-      author: author,
+      author: Author.find_by(slug: params['author_id']),
       slug: Sluggify.sluggify(params['title'])
     }
   end
 
   def slug
-    request.path_info[:id]
+    request.path_info[:slug]
   end
 
   def invalid
