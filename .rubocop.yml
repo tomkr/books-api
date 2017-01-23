@@ -12,3 +12,4 @@ Style/Documentation:
 Style/PredicateName:
   Exclude:
     - app/resources/**/*
+    - app/lib/authenticateable.rb
