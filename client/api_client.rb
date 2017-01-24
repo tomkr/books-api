@@ -7,3 +7,9 @@ class APIClient < HyperResource
   self.headers = { 'Content-Type' => 'application/json',
                    'Accept' => 'application/hal+json' }
 end
+
+module API
+  def api
+    @client ||= APIClient.new(root: options[:server])
+  end
+end

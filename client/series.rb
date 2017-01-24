@@ -4,14 +4,16 @@ require './client/api_client'
 
 # Subcommands to do with the books endpoints.
 class Series < Thor
+  include API
+
   desc 'list', 'List all series'
   def list
-    puts client.series.get.map(&:title).join("\n")
+    puts api.series.get.map(&:title).join("\n")
   end
 
   desc 'add TITLE', 'Add a serie'
   def add(title)
-    serie = client.series.post(title: title).body
+    serie = api.series.post(title: title).body
     puts "#{serie['title']} has been added"
   end
 
@@ -34,10 +36,6 @@ class Series < Thor
   private
 
   def find_by_title(title)
-    client.series.get.select { |s| s.title == title }.first
-  end
-
-  def client
-    @client ||= APIClient.new
+    api.series.get.select { |s| s.title == title }.first
   end
 end

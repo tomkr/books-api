@@ -4,6 +4,7 @@ require './client/client'
 
 # CLI Client for the API.
 class Client < Thor
+  class_option :server
   desc 'books', 'manage books'
   subcommand 'books', Books
 

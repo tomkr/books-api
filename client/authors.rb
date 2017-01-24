@@ -4,14 +4,16 @@ require './client/api_client'
 
 # Subcommands to do with the books endpoints.
 class Authors < Thor
+  include API
+
   desc 'list', 'List all authors'
   def list
-    puts client.authors.get.map(&:name).join("\n")
+    puts api.authors.get.map(&:name).join("\n")
   end
 
   desc 'add NAME', 'Add an author'
   def add(name)
-    author = client.authors.post(name: name).body
+    author = api.authors.post(name: name).body
     puts "#{author['name']} has been added"
   end
 
@@ -34,10 +36,6 @@ class Authors < Thor
   private
 
   def find_by_name(name)
-    client.authors.get.select { |a| a.name == name }.first
-  end
-
-  def client
-    @client ||= APIClient.new
+    api.authors.get.select { |a| a.name == name }.first
   end
 end
