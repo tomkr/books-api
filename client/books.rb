@@ -12,6 +12,16 @@ class Books < Thor
     puts client.books(to_params(options)).get.map(&:title).join("\n")
   end
 
+  desc 'add TITLE AUTHOR [SERIE] [POSITION]',
+       'Add a book written by an author'
+  def add(title, author_name, serie_name = nil, position = nil)
+    author = Sluggify.sluggify(author_name)
+    serie = Sluggify.sluggify(serie_name)
+    book = client.books.post(title: title, author_id: author, serie_id: serie,
+                             position: position).body
+    puts "#{book['title']} has been added"
+  end
+
   private
 
   def to_params(options)
