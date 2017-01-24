@@ -22,6 +22,17 @@ class Books < Thor
     puts "#{book['title']} has been added"
   end
 
+  desc 'edit TITLE NEW_TITLE NEW_AUTHOR [NEW_SERIE] [NEW_POSITION]',
+       'Edit an existing book'
+  def edit(title, new_title, author_name, serie_name = nil, position = nil)
+    author = Sluggify.sluggify(author_name)
+    serie = Sluggify.sluggify(serie_name)
+    book = client.books.get.select { |b| b.title == title }.first
+                 .put(title: new_title, author_id: author, serie_id: serie,
+                      position: position).body
+    puts "#{book['title']} has been updated"
+  end
+
   private
 
   def to_params(options)
