@@ -47,3 +47,19 @@ There a few ways to run the API. The simplest is by doing
     bin/server
 
 which starts a WebMachine server. If you're using `rack`, there is a rack config. This is useful for Heroku where this starts the server out of the box (no Procfile needed).
+
+## Client
+
+A simple CLI client is included with the app. It can be run using:
+
+    bin/client
+
+The client includes its own help text which you see just by running the bare command. The interface is split into subcommands based on the resources exposed. For instance
+
+    bin/client books list
+
+Lists all books in the API.
+
+By default the CLI connects with a local running instance of the API at `http://localhost:8080`. You can change this with the --server flag. For example:
+
+    bin/client books list --server https://stormy-earth-20973.herokuapp.com
