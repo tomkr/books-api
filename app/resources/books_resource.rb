@@ -42,11 +42,7 @@ class BooksResource < BaseResource
   end
 
   def book
-    @book ||= Book.new(params
-      .merge(
-        slug: Sluggify.sluggify(params['title']),
-        author: Author.find_by(slug: params['author_id'])
-      ))
+    @book ||= Book.new(book_params)
   end
 
   def books
@@ -55,6 +51,17 @@ class BooksResource < BaseResource
 
   def params
     @params ||= JSON.parse(request.body.to_s)
+                    .slice('title', 'author_id', 'serie_id', 'position')
+  end
+
+  def book_params
+    @book_params ||= {
+      title: params['title'],
+      slug: Sluggify.sluggify(params['title']),
+      author: Author.find_by(slug: params['author_id']),
+      serie: Serie.find_by(slug: params['serie_id']),
+      position: params['position'].to_i
+    }
   end
 
   def query

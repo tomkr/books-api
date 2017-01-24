@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 json.title book.title
+json.position book.position if book.position
 
 json._links do
   json.self { json.href "/books/#{book.slug}" }
