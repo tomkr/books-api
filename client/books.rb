@@ -27,16 +27,16 @@ class Books < Thor
   def edit(title, new_title, author_name, serie_name = nil, position = nil)
     author = Sluggify.sluggify(author_name)
     serie = Sluggify.sluggify(serie_name)
-    book = find_by_title(client, title)
+    book = find_by_title(title)
     return puts "#{title} not found" if book.nil?
-    book = book.put(title: new_title, author_id: author, serie_id: serie,
-                    position: position).body
-    puts "#{book['title']} has been updated"
+    new_book = book.put(title: new_title, author_id: author, serie_id: serie,
+                        position: position).body
+    puts "#{new_book['title']} has been updated"
   end
 
   desc 'delete TITLE', 'Remove an existing book'
   def delete(title)
-    book = find_by_title(client, title)
+    book = find_by_title(title)
     return puts "#{title} not found" if book.nil?
     book.delete
     puts "#{title} has been removed"
@@ -44,7 +44,7 @@ class Books < Thor
 
   private
 
-  def find_by_title(client, title)
+  def find_by_title(title)
     client.books.get.select { |b| b.title == title }.first
   end
 
