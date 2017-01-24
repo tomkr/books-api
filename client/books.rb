@@ -28,9 +28,18 @@ class Books < Thor
     author = Sluggify.sluggify(author_name)
     serie = Sluggify.sluggify(serie_name)
     book = client.books.get.select { |b| b.title == title }.first
-                 .put(title: new_title, author_id: author, serie_id: serie,
-                      position: position).body
+    return puts "#{title} not found" if book.nil?
+    book = book.put(title: new_title, author_id: author, serie_id: serie,
+                    position: position).body
     puts "#{book['title']} has been updated"
+  end
+
+  desc 'delete TITLE', 'Remove an existing book'
+  def delete(title)
+    book = client.books.get.select { |b| b.title == title }.first
+    return puts "#{title} not found" if book.nil?
+    book.delete
+    puts "#{title} has been removed"
   end
 
   private
