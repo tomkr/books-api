@@ -2,7 +2,7 @@
 require './app/resources/base_resource'
 require './app/models/book'
 
-# A webmachine resource representing a book.
+# A webmachine resource for a single book.
 class BookResource < BaseResource
   def allowed_methods
     %w(OPTIONS GET PUT DELETE)

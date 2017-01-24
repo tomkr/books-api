@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require './app/resources/base_resource'
 
-# A webmachine resource for the collection of books.
+# A webmachine resource for the API.
 class ApiResource < BaseResource
   def allowed_methods
     %w(OPTIONS GET)

@@ -2,7 +2,7 @@
 require './app/resources/base_resource'
 require './app/models/serie'
 
-# A webmachine resource representing a serie.
+# A webmachine resource for a single serie.
 class SerieResource < BaseResource
   def allowed_methods
     %w(OPTIONS GET PUT DELETE)

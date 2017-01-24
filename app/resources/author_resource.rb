@@ -2,7 +2,7 @@
 require './app/resources/base_resource'
 require './app/models/author'
 
-# A webmachine resource for the collection of books.
+# A webmachine resource for a single author.
 class AuthorResource < BaseResource
   def allowed_methods
     %w(OPTIONS GET PUT DELETE)
